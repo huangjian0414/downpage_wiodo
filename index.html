@@ -20,9 +20,10 @@
                 <img src="assets/logo.png" alt="App Logo" class="img-fluid">
             </div>
             <div class="col-md-4">
-                <h2>V2.3.0_20230828 18:36:46</h2>
+                <h2>V2.3.0_20230905 19:01:31</h2>
                 <p>内测apk下载测试</p>
-                <a href="http://192.168.12.146:9002/app/V2.3.0/apk/20230828/18_36_46.apk" class="btn btn-success" download>立即下载</a>
+                <a href="http://192.168.12.146:9002/app/V2.3.0/apk/20230905/19_01_31.apk" class="btn btn-success" download id="download">立即下载</a>
+                <button id="myButton" onclick="downloadDebugApk()">debug apk下载</button>
                	<br>
                	<br>
                 <p>扫描下方二维码直接下载APK文件：</p>
@@ -34,6 +35,22 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function downloadDebugApk() {
+            var button = document.getElementById('download');
+            let originalString = button.href;
+            let replacedString = originalString.replace('.apk', '_debug.apk');
+            // console.log(replacedString)
+        
+            let downloadLink = document.createElement('a');
+            downloadLink.href = replacedString;
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+        }
+    </script>
 </body>
 
 </html>
