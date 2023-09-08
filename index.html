@@ -3,38 +3,103 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>唯哆apk下载</title>
+    <!-- <link rel="stylesheet" type="text/css" href="css/home.css"/> -->
+    <style type="text/css">
+        
+
+
+.all_center {
+  text-align: center;
+}
+
+
+.top_row {
+ display: flex;
+ flex-direction: row;
+ justify-content: center;
+ align-items: center;
+ margin-top: 30px;
+}
+.top_column {
+display: flex;
+flex-direction: column;
+align-items: left;
+padding-left: 10px;
+}
+
+.logo_img {
+ width: 100px;
+ height: 100px;
+}
+
+.qrcode_img {
+ width: 200px;
+ height: 200px;
+}
+
+.bottom_column {
+display: flex;
+flex-direction: column;
+align-items: center;
+padding-left: 10px;
+}
+
+
+.button_download {
+ background-color: white;
+ color: #0389FF;
+ border:1px #0389FF solid;
+ font-size: 16px;
+ margin-left: 20px;
+ padding-left: 10px;
+ padding-right: 10px
+}
+
+
+h4 {
+ text-align: left;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font: 16px/1.5 sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+    </style>
+    
 </head>
 
 <body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1>唯哆apk下载页面</h1>
+    <div class="all_center">
+        <h1>唯哆内测apk下载</h1>
+        
+        <div class="top_row">
+            <img class="logo_img" src="assets/logo.png" alt="App Logo"/>
+            <div class="top_column">
+                <h4>应用名：唯哆</h4>
+                <h5>版本信息：V2.3.0_20230905 19:01:31</h5>
             </div>
         </div>
-        <div class="row mt-5">
-            <div class="col-md-4 offset-md-2">
-                <img src="assets/logo.png" alt="App Logo" class="img-fluid">
-            </div>
-            <div class="col-md-4">
-                <h2>V2.3.0_20230905 19:01:31</h2>
-                <p>内测apk下载测试</p>
-                <a href="http://192.168.12.146:9002/app/V2.3.0/apk/20230905/19_01_31.apk" class="btn btn-success" download id="download">立即下载</a>
-                <button id="myButton" onclick="downloadDebugApk()">debug apk下载</button>
-               	<br>
-               	<br>
-                <p>扫描下方二维码直接下载APK文件：</p>
-                <img src="assets/downloadqrcode.png" alt="QR Code" class="img-fluid" />
-            </div>
+        <div class="top_row">
+            <a href="http://192.168.12.146:9002/app/V2.3.0/apk/20230907/18_52_21.apk" id="download"></a>
+            <button class="button_download" id="myButton" onclick="downloadReleaseApk()">release apk下载</button>
+            <button class="button_download" id="myButton" onclick="downloadDebugApk()">debug apk下载</button>
+        </div>
+        <br>
+        <div class="bottom_column">
+                <p>扫描下方二维码直接下载release版的apk文件</p>
+                <img class="qrcode_img" src="assets/downloadqrcode.png" alt="QR Code" class="img-fluid" />
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <script>
         function downloadDebugApk() {
             var button = document.getElementById('download');
@@ -50,6 +115,17 @@
             document.body.removeChild(downloadLink);
 
         }
+        function downloadReleaseApk() {
+            var button = document.getElementById('download');
+            let originalString = button.href;
+            let downloadLink = document.createElement('a');
+            downloadLink.href = originalString;
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+
     </script>
 </body>
 
