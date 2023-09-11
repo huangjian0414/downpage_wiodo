@@ -56,6 +56,15 @@ padding-left: 10px;
  padding-right: 10px
 }
 
+.dialog_center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  z-index: 9999;
+}
+
 
 h4 {
  text-align: left;
@@ -84,28 +93,34 @@ body {
             <img class="logo_img" src="assets/logo.png" alt="App Logo"/>
             <div class="top_column">
                 <h4>应用名：唯哆</h4>
-                <h5>版本信息: V2.4.0_20230908 10:54:32</h5>
+                <h5>版本信息: V2.4.0_20230908 11:08:57</h5>
             </div>
         </div>
-        <div class="top_row">
-            <a href="http://192.168.12.146:9002/app/V2.4.0/apk/20230908/10_54_32.apk" id="download"></a>
-            <button class="button_download" id="myButton" onclick="downloadReleaseApk()">release apk下载</button>
-            <button class="button_download" id="myButton" onclick="downloadDebugApk()">debug apk下载</button>
+        <div class="top_row" id="buttons" style="display: none;">
+            <a href="http://192.168.12.146:9002/app/V2.4.0/apk/20230908/11_08_57.apk" id="download"></a>
+            <button class="button_download" id="releaseButton" onclick="downloadReleaseApk()">release apk下载</button>
+            <button class="button_download" id="debugButton" onclick="downloadDebugApk()">debug apk下载</button>
         </div>
         <br>
-        <div class="bottom_column">
+        <div class="bottom_column" id="qrcode" style="display: none;">
                 <p>扫描下方二维码直接下载release版的apk文件</p>
                 <img class="qrcode_img" src="assets/downloadqrcode.png" alt="QR Code" class="img-fluid" />
         </div>
+        
     </div>
-
+    <div>
+        <dialog class="dialog_center" id="inputDialog">
+            <h2>口令</h2>
+            <input type="text" id="codeInput" placeholder="请输入口令">
+            <button id="validateBtn">提交</button>
+        </dialog>
+    </div>
 
     <script>
         function downloadDebugApk() {
             var button = document.getElementById('download');
             let originalString = button.href;
             let replacedString = originalString.replace('.apk', '_debug.apk');
-            // console.log(replacedString)
         
             let downloadLink = document.createElement('a');
             downloadLink.href = replacedString;
@@ -125,6 +140,74 @@ body {
             downloadLink.click();
             document.body.removeChild(downloadLink);
         }
+        if (!getValue()) {
+            var openDialogBtn = document.getElementById("openDialogBtn");
+            var inputDialog = document.getElementById("inputDialog");
+            var validateBtn = document.getElementById("validateBtn");
+            var codeInput = document.getElementById("codeInput");
+            inputDialog.showModal();
+            validateBtn.addEventListener("click", function() {
+                if (true) {}
+                var code = codeInput.value;
+                if (code == "wiodo1234") {
+                  alert("验证通过！");
+                  var buttons = document.getElementById("buttons");
+                  buttons.style.display = "block";
+                  var qrcode = document.getElementById("qrcode");
+                  qrcode.style.display = "block";
+                  setValue();
+                  inputDialog.close();
+                } else {
+                  alert("验证码错误！");
+                }
+              });
+            codeInput.addEventListener("keyup", function(event) {
+                if (event.keyCode == 13) {
+                    var code = codeInput.value;
+                    if (code == "wiodo1234") {
+                      alert("验证通过！");
+                      var buttons = document.getElementById("buttons");
+                      buttons.style.display = "block";
+                      var qrcode = document.getElementById("qrcode");
+                      qrcode.style.display = "block";
+                      setValue();
+                      inputDialog.close();
+                    } else {
+                      alert("验证码错误！");
+                    }
+                    
+                }
+                
+              });
+        }else{
+            var buttons = document.getElementById("buttons");
+            buttons.style.display = "block";
+            var qrcode = document.getElementById("qrcode");
+            qrcode.style.display = "block";
+        }
+
+        function setValue() {
+          var expirationTime = new Date().getTime() + (2 * 60 * 1000);
+          var data = {
+            expiresAt: expirationTime
+          };
+          localStorage.setItem("validate", JSON.stringify(data));
+        }
+
+        function getValue() {
+          var data = localStorage.getItem("validate");
+          if (data) {
+            data = JSON.parse(data);
+            if (new Date().getTime() < data.expiresAt) {
+              return true;
+            } else {
+              localStorage.removeItem("validate");
+              return false;
+            }
+          }
+          return false;
+        }
+
 
     </script>
 </body>
