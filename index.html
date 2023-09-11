@@ -93,18 +93,18 @@ body {
             <img class="logo_img" src="assets/logo.png" alt="App Logo"/>
             <div class="top_column">
                 <h4>应用名：唯哆</h4>
-                <h5>版本信息: V2.4.0_20230908 11:08:57</h5>
+                <h5>版本信息: V2.4.0_20230911 16:30:52</h5>
             </div>
         </div>
         <div class="top_row" id="buttons" style="display: none;">
-            <a href="http://192.168.12.146:9002/app/V2.4.0/apk/20230908/11_08_57.apk" id="download"></a>
+            <a href="http://58.34.52.50:39002/app/V2.4.0/apk/20230911/16_30_52.apk" id="download"></a>
             <button class="button_download" id="releaseButton" onclick="downloadReleaseApk()">release apk下载</button>
             <button class="button_download" id="debugButton" onclick="downloadDebugApk()">debug apk下载</button>
         </div>
         <br>
         <div class="bottom_column" id="qrcode" style="display: none;">
                 <p>扫描下方二维码直接下载release版的apk文件</p>
-                <img class="qrcode_img" src="assets/downloadqrcode.png" alt="QR Code" class="img-fluid" />
+                <img class="qrcode_img" src="assets/downloadqrcode.png" id="qrImg" alt="QR Code" class="img-fluid" />
         </div>
         
     </div>
@@ -117,11 +117,25 @@ body {
     </div>
 
     <script>
+
+      var button = document.getElementById('download');
+      var originalString = button.href;
+      originalString = originalString.replace('.apk', '');
+      var words = originalString.split("/");
+      console.log(words);
+      if (words.length >= 2) {
+        let first = words[words.length - 2];
+        let second = words[words.length - 1];
+        
+        var qrImg = document.getElementById('qrImg');
+        qrImg.src = "assets/downloadqrcode" + first + second + ".png";
+
+      }
+
         function downloadDebugApk() {
             var button = document.getElementById('download');
             let originalString = button.href;
             let replacedString = originalString.replace('.apk', '_debug.apk');
-        
             let downloadLink = document.createElement('a');
             downloadLink.href = replacedString;
             downloadLink.style.display = 'none';
