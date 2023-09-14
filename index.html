@@ -4,84 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>唯哆apk下载</title>
-    <!-- <link rel="stylesheet" type="text/css" href="css/home.css"/> -->
-    <style type="text/css">
-        
-
-
-.all_center {
-  text-align: center;
-}
-
-
-.top_row {
- display: flex;
- flex-direction: row;
- justify-content: center;
- align-items: center;
- margin-top: 30px;
-}
-.top_column {
-display: flex;
-flex-direction: column;
-align-items: left;
-padding-left: 10px;
-}
-
-.logo_img {
- width: 100px;
- height: 100px;
-}
-
-.qrcode_img {
- width: 200px;
- height: 200px;
-}
-
-.bottom_column {
-display: flex;
-flex-direction: column;
-align-items: center;
-padding-left: 10px;
-}
-
-
-.button_download {
- background-color: white;
- color: #0389FF;
- border:1px #0389FF solid;
- font-size: 16px;
- margin-left: 20px;
- padding-left: 10px;
- padding-right: 10px
-}
-
-.dialog_center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
-  z-index: 9999;
-}
-
-
-h4 {
- text-align: left;
-}
-
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  font: 16px/1.5 sans-serif;
-  color: #333;
-  background-color: #fff;
-}
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/home.css"/>
     
 </head>
 
@@ -93,13 +16,15 @@ body {
             <img class="logo_img" src="assets/logo.png" alt="App Logo"/>
             <div class="top_column">
                 <h4>应用名：唯哆</h4>
-                <h5>版本信息: V2.4.0_20230913 11:17:13</h5>
+                <h5>版本信息: V2.4.0_20230913 18:59:16</h5>
+                <h5 id="iosInfo">iOS版本信息: V2.4.0_20230913 18:59:16</h5>
             </div>
         </div>
         <div class="top_row" id="buttons" style="display: none;">
-            <a href="http://58.34.52.50:39002/app/V2.4.0/apk/20230913/11_17_13.apk" id="download"></a>
+            <a href="http://58.34.52.50:39002/app/V2.4.0/apk/20230913/18_59_16.apk" id="download"></a>
             <button class="button_download" id="releaseButton" onclick="downloadReleaseApk()">release apk下载</button>
             <button class="button_download" id="debugButton" onclick="downloadDebugApk()">debug apk下载</button>
+            <button class="button_download" id="ipaButton" onclick="downloadIpa()">iOS下载</button>
         </div>
         <br>
         <div class="bottom_column" id="qrcode" style="display: none;">
@@ -108,12 +33,10 @@ body {
         </div>
         
     </div>
-    <div>
-        <dialog class="dialog_center" id="inputDialog">
-            <h2>口令</h2>
-            <input type="text" id="codeInput" placeholder="请输入口令">
-            <button id="validateBtn">提交</button>
-        </dialog>
+    <div class="dialog_center" id="inputDialog" style="display: block;">
+        <h2>口令</h2>
+        <input type="text" id="codeInput" placeholder="请输入口令">
+        <button id="validateBtn">提交</button>
     </div>
 
     <script>
@@ -154,14 +77,41 @@ body {
             downloadLink.click();
             document.body.removeChild(downloadLink);
         }
+        function downloadIpa(){
+          var platform = navigator.platform.toLowerCase();
+          if (platform.includes("iphone") || platform.includes("ipad") || platform.includes("ipod")) {
+
+            var isWeChat = /micromessenger/i.test(navigator.userAgent);
+            var isDingTalk = /dingtalk/i.test(navigator.userAgent);
+            if (isWeChat || isDingTalk) {
+              openSafari();
+            }else{
+              downloadiOS();
+            }
+          }else{
+            alert("请使用iOS设备下载哦！");
+          }
+
+        }
+        function openSafari() {
+          if (/iphone|ipod|ipad/i.test(navigator.userAgent)) {
+            window.location.href = 'itms-services:///?action=download-manifest&url=https://test.sihuacloud.com:39002/app/wiodo_ipa/manifest.plist';
+          } else {
+            console.log('This feature is only available on iOS devices.');
+          }
+        }
+        function downloadiOS(){
+          let downloadLink = document.createElement('a');
+            downloadLink.href = "itms-services:///?action=download-manifest&url=https://test.sihuacloud.com:39002/app/wiodo_ipa/manifest.plist";
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
         if (!getValue()) {
-            var openDialogBtn = document.getElementById("openDialogBtn");
-            var inputDialog = document.getElementById("inputDialog");
             var validateBtn = document.getElementById("validateBtn");
             var codeInput = document.getElementById("codeInput");
-            inputDialog.showModal();
             validateBtn.addEventListener("click", function() {
-                if (true) {}
                 var code = codeInput.value;
                 if (code == "wiodo1234") {
                   alert("验证通过！");
@@ -169,8 +119,9 @@ body {
                   buttons.style.display = "block";
                   var qrcode = document.getElementById("qrcode");
                   qrcode.style.display = "block";
+                  var inputDialog = document.getElementById("inputDialog");
+                  inputDialog.style.display = "none";
                   setValue();
-                  inputDialog.close();
                 } else {
                   alert("验证码错误！");
                 }
@@ -184,8 +135,9 @@ body {
                       buttons.style.display = "block";
                       var qrcode = document.getElementById("qrcode");
                       qrcode.style.display = "block";
+                      var inputDialog = document.getElementById("inputDialog");
+                      inputDialog.style.display = "none";
                       setValue();
-                      inputDialog.close();
                     } else {
                       alert("验证码错误！");
                     }
@@ -198,6 +150,8 @@ body {
             buttons.style.display = "block";
             var qrcode = document.getElementById("qrcode");
             qrcode.style.display = "block";
+            var inputDialog = document.getElementById("inputDialog");
+            inputDialog.style.display = "none";
         }
 
         function setValue() {
