@@ -16,15 +16,17 @@
             <img class="logo_img" src="assets/logo.png" alt="App Logo"/>
             <div class="top_column">
                 <h4>应用名：唯哆</h4>
-                <h5>版本信息: V2.4.0_20230913 18:59:16</h5>
+                <h5>版本信息: V2.4.0_20230914 18:56:15</h5>
                 <h5 id="iosInfo">iOS版本信息: V2.4.0_20230913 18:59:16</h5>
+                <h5 id="vfplayerDemo">播放器demo更新信息: 20230915 10:13:44</h5>
             </div>
         </div>
         <div class="top_row" id="buttons" style="display: none;">
-            <a href="https://test.sihuacloud.com:39002/app/V2.4.0/apk/20230913/18_59_16.apk" id="download"></a>
+            <a href="https://test.sihuacloud.com:39002/app/V2.4.0/apk/20230914/18_56_15.apk" id="download"></a>
             <button class="button_download" id="releaseButton" onclick="downloadReleaseApk()">release apk下载</button>
             <button class="button_download" id="debugButton" onclick="downloadDebugApk()">debug apk下载</button>
             <button class="button_download" id="ipaButton" onclick="downloadIpa()">iOS下载</button>
+            <button class="button_download" id="vfplayerDemoButton" onclick="downloadVfplayerDemo()">播放器demo下载</button>
         </div>
         <br>
         <div class="bottom_column" id="qrcode" style="display: none;">
@@ -103,6 +105,14 @@
         function downloadiOS(){
           let downloadLink = document.createElement('a');
             downloadLink.href = "itms-services:///?action=download-manifest&url=https://test.sihuacloud.com:39002/app/wiodo_ipa/manifest.plist";
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+        function downloadVfplayerDemo(){
+          let downloadLink = document.createElement('a');
+            downloadLink.href = "https://test.sihuacloud.com:39002/app/vfplayer_demo/app-debug.apk";
             downloadLink.style.display = 'none';
             document.body.appendChild(downloadLink);
             downloadLink.click();
