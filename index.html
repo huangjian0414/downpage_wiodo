@@ -34,7 +34,14 @@
         <div class="bottom_column" id="qrcode" style="display: none;">
                 <p>扫描下方二维码直接下载release版的apk文件</p>
                 <img class="qrcode_img" src="assets/downloadqrcode.png" id="qrImg" alt="QR Code" class="img-fluid" />
+
+                <h3>历史Apk版本</h3>
+                <ul id="history_version"></ul>
+
         </div>
+
+        <h5 id="history_info" style="display: none;">["https://test.sihuacloud.com:39002/app/V2.4.1/apk/20231027/18_43_26.apk", "https://test.sihuacloud.com:39002/app/V2.4.1/apk/20231026/17_29_01.apk", "https://test.sihuacloud.com:39002/app/V2.4.0/apk/20231023/17_34_59.apk","https://test.sihuacloud.com:39002/app/V2.4.0/apk/20231023/15_34_19.apk","https://test.sihuacloud.com:39002/app/V2.4.0/apk/20231023/15_29_51.apk","https://test.sihuacloud.com:39002/app/V2.4.0/apk/20231020/20_32_50.apk","https://test.sihuacloud.com:39002/app/V2.4.0/apk/20231020/17_48_31.apk","https://test.sihuacloud.com:39002/app/V2.3.0/apk/20230907/18_52_21.apk","https://test.sihuacloud.com:39002/app/V2.3.0/apk/20230905/19_01_31.apk"]</h5>
+
         
     </div>
     <div class="dialog_center" id="inputDialog" style="display: block;">
@@ -49,7 +56,7 @@
       var originalString = button.href;
       originalString = originalString.replace('.apk', '');
       var words = originalString.split("/");
-      console.log(words);
+      // console.log(words);
       if (words.length >= 2) {
         let first = words[words.length - 2];
         let second = words[words.length - 1];
@@ -192,6 +199,55 @@
             }
           }
           return false;
+        }
+
+        function handleClick(param) {
+          return function() {
+            let downloadLink = document.createElement('a');
+            downloadLink.href = param;
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          }
+        }
+
+        dealHistoryInfo();
+        function dealHistoryInfo(){
+          var history_info = document.getElementById("history_info");
+          console.log(history_info.textContent);
+          var list = JSON.parse(history_info.textContent);
+          
+          var ul = document.getElementById("history_version");
+          for (var i = 0; i < list.length; i++) {
+            var version_url = list[i];
+            version_url = version_url.replace("https://test.sihuacloud.com:39002/app/","");
+            version_url = version_url.replace(".apk","");
+            version_url = version_url.replace(/_/g, ":");
+            version_url = version_url.replace("/apk/","_");
+            version = version_url.replace("/"," ");
+
+            var li = document.createElement("li");
+            var btn = document.createElement("button"); 
+            btn.class = "button_download"; 
+            btn.id = "releaseButton"+i;
+            btn.textContent = version;
+            btn.addEventListener("click", handleClick(list[i])); 
+            li.appendChild(btn);
+            var btn1 = document.createElement("a"); 
+            btn1.textContent = "···";
+            li.appendChild(btn1);
+            var btn2 = document.createElement("button"); 
+            btn2.class = "button_download"; 
+            btn2.id = "debugButton"+i;
+            btn2.textContent = "debug";
+            var debug_url = list[i];
+            debug_url = debug_url.replace(".apk","_debug.apk");
+            btn2.addEventListener("click", handleClick(debug_url)); 
+            li.appendChild(btn2);
+            ul.appendChild(li); 
+          }
+
         }
 
 
