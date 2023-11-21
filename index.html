@@ -17,14 +17,24 @@
             <div class="top_column">
                 <h4>应用名：唯哆</h4>
 				<div style="display: inline-block; text-align: left;">
-					<h5>版本信息: V2.5.0_20231121 18:34:11</h5>
+<<<<<<< HEAD
+					<h5>版本信息: V2.5.0_20231121 18:50:04</h5>
 					<h5 id="iosInfo">iOS版本信息: V2.4.1_20231027 17:20:49</h5>
 					<h5 id="vfplayerDemo">播放器demo更新信息: 20230918 17_25_27</h5>
+=======
+					<h5>版本信息: V2.5.0_20231121 18:50:04</h5>
+					<h5 id="iosInfo">iOS版本信息: V2.5.0_20231120 20:38:22</h5>
+					<h5 id="vfplayerDemo">播放器demo更新信息: 20231108 10_43_45</h5>
+>>>>>>> b263f77793556bd4371735a7675a753023893012
 				</div>  
             </div>
         </div>
         <div class="top_row" id="buttons" style="display: none;">
-            <a href="https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231121/18_34_11.apk" id="download"></a>
+<<<<<<< HEAD
+            <a href="https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231121/18_50_04.apk" id="download"></a>
+=======
+            <a href="https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231121/18_50_04.apk" id="download"></a>
+>>>>>>> b263f77793556bd4371735a7675a753023893012
             <button class="button_download" id="releaseButton" onclick="downloadReleaseApk()">release apk下载</button>
             <button class="button_download" id="debugButton" onclick="downloadDebugApk()">debug apk下载</button>
             <button class="button_download" id="ipaButton" onclick="downloadIpa()">iOS下载</button>
@@ -34,7 +44,14 @@
         <div class="bottom_column" id="qrcode" style="display: none;">
                 <p>扫描下方二维码直接下载release版的apk文件</p>
                 <img class="qrcode_img" src="assets/downloadqrcode.png" id="qrImg" alt="QR Code" class="img-fluid" />
+
+                <h3>历史Apk版本</h3>
+                <ul id="history_version"></ul>
+
         </div>
+
+        <h5 id="history_info" style="display: none;">["https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231121/18_50_04.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231121/18_34_11.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231120/10_00_05.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231115/15_15_14.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231114/18_58_44.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231114/16_23_08.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231114/16_19_34.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231113/18_37_02.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231111/22_53_56.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231111/14_30_36.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231111/13_55_46.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231111/13_00_57.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231110/21_13_03.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231110/15_18_47.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231108/14_25_20.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231107/18_46_43.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231107/11_18_53.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231107/11_14_56.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231107/10_58_08.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231107/10_52_04.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231106/15_43_28.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231106/15_33_08.apk","https://test.sihuacloud.com:39002/app/V2.4.1/apk/20231103/17_54_42.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231102/17_11_43.apk","https://test.sihuacloud.com:39002/app/V2.4.1/apk/20231102/16_33_38.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231101/17_50_44.apk","https://test.sihuacloud.com:39002/app/V2.5.0/apk/20231030/17_56_38.apk","https://test.sihuacloud.com:39002/app/V2.4.1/apk/20231101/18_38_39.apk", "https://test.sihuacloud.com:39002/app/V2.4.0/apk/20231023/17_34_59.apk","https://test.sihuacloud.com:39002/app/V2.4.0/apk/20231023/15_34_19.apk","https://test.sihuacloud.com:39002/app/V2.3.0/apk/20230907/18_52_21.apk"]</h5>
+        <div style="padding-bottom: 30px"></div>
         
     </div>
     <div class="dialog_center" id="inputDialog" style="display: block;">
@@ -49,7 +66,7 @@
       var originalString = button.href;
       originalString = originalString.replace('.apk', '');
       var words = originalString.split("/");
-      console.log(words);
+      // console.log(words);
       if (words.length >= 2) {
         let first = words[words.length - 2];
         let second = words[words.length - 1];
@@ -192,6 +209,55 @@
             }
           }
           return false;
+        }
+
+        function handleClick(param) {
+          return function() {
+            let downloadLink = document.createElement('a');
+            downloadLink.href = param;
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+          }
+        }
+
+        dealHistoryInfo();
+        function dealHistoryInfo(){
+          var history_info = document.getElementById("history_info");
+          console.log(history_info.textContent);
+          var list = JSON.parse(history_info.textContent);
+          
+          var ul = document.getElementById("history_version");
+          for (var i = 1; i < list.length; i++) {
+            var version_url = list[i];
+            version_url = version_url.replace("https://test.sihuacloud.com:39002/app/","");
+            version_url = version_url.replace(".apk","");
+            version_url = version_url.replace(/_/g, ":");
+            version_url = version_url.replace("/apk/","_");
+            version = version_url.replace("/"," ");
+
+            var li = document.createElement("li");
+            var btn = document.createElement("button"); 
+            btn.class = "button_download"; 
+            btn.id = "releaseButton"+i;
+            btn.textContent = version;
+            btn.addEventListener("click", handleClick(list[i])); 
+            li.appendChild(btn);
+            var btn1 = document.createElement("a"); 
+            btn1.textContent = "···";
+            li.appendChild(btn1);
+            var btn2 = document.createElement("button"); 
+            btn2.class = "button_download"; 
+            btn2.id = "debugButton"+i;
+            btn2.textContent = "debug";
+            var debug_url = list[i];
+            debug_url = debug_url.replace(".apk","_debug.apk");
+            btn2.addEventListener("click", handleClick(debug_url)); 
+            li.appendChild(btn2);
+            ul.appendChild(li); 
+          }
+
         }
 
 
