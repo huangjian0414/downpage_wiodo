@@ -1,0 +1,14 @@
+ {
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "Y7HVALW8ZT.com.sihuatech.cloudvideo",
+                "paths": [ "*" ]
+            }
+        ]
+    },
+    "webcredentials" : {
+        "apps" : ["Y7HVALW8ZT.com.sihuatech.cloudvideo"]
+    }
+}
